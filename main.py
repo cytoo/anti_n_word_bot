@@ -6,6 +6,7 @@ import time
 import config
 
 N_WORD_TIME = time.time()
+BOT_UP_TIME = time.time()
 SAID_TIMES = 0
 client = TelegramClient(StringSession(config.session), config.api_id, config.api_hash)
 
@@ -35,10 +36,13 @@ async def scanner(event: NewMessage.Event):
         N_WORD_TIME = time.time()
 
 
-@client.on(NewMessage(outgoing=True, pattern=r"^\.status$"))
+@client.on(NewMessage(outgoing=True, pattern=r"^\.(status|stats)$"))
 async def stats(event: NewMessage.Event):
     n_time = await format_time(int(time.time() - N_WORD_TIME))
-    await event.edit(f"`ANTI-N-WORD BOT`\n**you've said the N-word {SAID_TIMES} times\n"
+    bot_uptime = await format_time(int(time.time() - BOT_UP_TIME))
+    await event.edit(f"`ANTI-N-WORD BOT STATUS`\n"
+                     f"**bot uptime: {bot_uptime}"
+                     f"you've said the N-word {SAID_TIMES} times\n"
                      f"you haven't said the N-word in {n_time}**")
 
 client.start()
