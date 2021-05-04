@@ -6,6 +6,7 @@ import time
 import config
 
 N_WORD_TIME = time.time()
+SAID_TIMES = 0
 client = TelegramClient(StringSession(config.session), config.api_id, config.api_hash)
 
 
@@ -24,19 +25,21 @@ async def format_time(seconds: int) -> str:
 
 @client.on(NewMessage(outgoing=True))
 async def scanner(event: NewMessage.Event):
-    global N_WORD_TIME
+    global N_WORD_TIME, SAID_TIMES
     text = event.message.text
     if re.findall(r"(n|i|e){1,32}((g{2,32}|q){1,32}|[rgq]{2,32})[aoe3r]{1,32}", text):
         n_time = await format_time(int(time.time() - N_WORD_TIME))
-        await event.reply("`ANTI-N-WORD BOT`\n**restting the timer because you said the N-word.**\n you've been "
-                          "going on without saying the N-word for %s" % n_time)
+        SAID_TIMES += 1
+        await event.reply("`ANTI-N-WORD BOT`\n**restting the timer because you said the N-word.**\n the las time "
+                          "you've said the N-word the N-word was %s ago" % n_time)
         N_WORD_TIME = time.time()
 
 
 @client.on(NewMessage(outgoing=True, pattern=r"^\.status$"))
 async def stats(event: NewMessage.Event):
     n_time = await format_time(int(time.time() - N_WORD_TIME))
-    await event.edit(f"`ANTI-N-WORD BOT` **good job! you've been going on without saying the N-word for {n_time}**")
+    await event.edit(f"`ANTI-N-WORD BOT` **you've said the N-word {SAID_TIMES} and "
+                     f"the last time you said the N-word was {n_time} ago**")
 
 client.start()
 print("N_WORD_BOT online")
