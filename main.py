@@ -42,7 +42,7 @@ async def stats(event: NewMessage.Event):
     bot_uptime = await format_time(int(time.time() - BOT_UP_TIME))
     await event.edit(f"`ANTI-N-WORD BOT STATUS`\n"
                      f"**bot uptime: {bot_uptime}\n"
-                     f"you've said the N-word {SAID_TIMES} times\n"
+                     f"you've said the N-word {SAID_TIMES} time(s)\n"
                      f"you haven't said the N-word in {n_time}**")
 
 client.start()
