@@ -1,0 +1,21 @@
+{
+  "name": "Anti N-Word telegram bot",
+  "description": "a telegram bot to stop you from saying the N word",
+  "repository": "https://github.com/cytoo/anti_n_word_bot",
+  "keywords": ["userbot", "telegram", "racism"],
+  "env": {
+    "STRING_SESSION":
+    {
+      "description": "your string session, if you don't have one then check the README on the github repo",
+      "required": true
+    },
+    "API_ID": {
+      "description": "your telegram API_ID from my.telegram.org",
+      "required": true
+    },
+      "API_HASH": {
+      "description": "your telegram API_HASH from my.telegram.org",
+      "required": true
+    }
+  }
+}
