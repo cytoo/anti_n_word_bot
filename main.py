@@ -27,7 +27,7 @@ async def format_time(seconds: int) -> str:
 async def scanner(event: NewMessage.Event):
     global N_WORD_TIME, SAID_TIMES
     text = event.message.text
-    if re.findall(r"(n|i|e){1,32}((g{2,32}|q){1,32}|[rgq]{2,32})[aoe3r]{1,32}", text):
+    if re.findall(r"(n|i|e){1,32}((g{2,32}|q){1,32}|[rgq]{2,32})[aoe3r]{1,32}", text.lower()):
         n_time = await format_time(int(time.time() - N_WORD_TIME))
         SAID_TIMES += 1
         await event.reply("`ANTI-N-WORD BOT`\n**restting the timer because you said the N-word.**\n"
