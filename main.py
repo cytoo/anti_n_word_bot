@@ -38,7 +38,7 @@ async def scanner(event: NewMessage.Event):
 @client.on(NewMessage(outgoing=True, pattern=r"^\.status$"))
 async def stats(event: NewMessage.Event):
     n_time = await format_time(int(time.time() - N_WORD_TIME))
-    await event.edit(f"`ANTI-N-WORD BOT` **you've said the N-word {SAID_TIMES} and "
+    await event.edit(f"`ANTI-N-WORD BOT` **you've said the N-word {SAID_TIMES} times and "
                      f"the last time you said the N-word was {n_time} ago**")
 
 client.start()
