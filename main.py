@@ -30,7 +30,7 @@ async def scanner(event: NewMessage.Event):
     if re.findall(r"(n|i|e){1,32}((g{2,32}|q){1,32}|[rgq]{2,32})[aoe3r]{1,32}", text):
         n_time = await format_time(int(time.time() - N_WORD_TIME))
         SAID_TIMES += 1
-        await event.reply("`ANTI-N-WORD BOT`\n**restting the timer because you said the N-word.**\n the las time "
+        await event.reply("`ANTI-N-WORD BOT`\n**restting the timer because you said the N-word.**\n the last time "
                           "you've said the N-word the N-word was %s ago" % n_time)
         N_WORD_TIME = time.time()
 
@@ -38,7 +38,7 @@ async def scanner(event: NewMessage.Event):
 @client.on(NewMessage(outgoing=True, pattern=r"^\.status$"))
 async def stats(event: NewMessage.Event):
     n_time = await format_time(int(time.time() - N_WORD_TIME))
-    await event.edit(f"`ANTI-N-WORD BOT` **you've said the N-word {SAID_TIMES} times and "
+    await event.edit(f"`ANTI-N-WORD BOT`\n**you've said the N-word {SAID_TIMES} times\n"
                      f"the last time you said the N-word was {n_time} ago**")
 
 client.start()
